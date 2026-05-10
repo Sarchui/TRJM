@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRJM | المتجر المتكامل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-right">
+        <button class="menu-btn" onclick="openSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+<div class="header-center">
+    <span class="logo" onclick="showPage('home-page')" style="cursor: pointer;">TRJM</span>
+</div>
+    </div>
+
+    <div class="header-left">
+        <button id="lang-btn" class="lang-switch-btn" onclick="toggleLanguage()">English</button>
+      <div class="cart-trigger" onclick="showPage('cart-page')" style="cursor: pointer;">
+    <i class="fas fa-shopping-basket"></i>
+    <span id="cart-counter">0</span>
+</div>
+    </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<h1 class="logo" id="logo-text">TRJM</h1>
+
+<aside class="sidebar" id="sidebar">
+    <nav>
+        <a href="javascript:void(0)" id="nav-home" onclick="showPage('home-page')">الرئيسية</a>
+     <div class="side-dropdown">
+    <a href="javascript:void(0)" id="nav-services" onclick="toggleServices()">
+        خدماتنا <i class="fas fa-chevron-down" id="drop-icon"></i>
+    </a>
+    <div id="services-submenu" class="submenu">
+        <a href="javascript:void(0)" onclick="showCategory('certified')">الترجمة المعتمدة</a>
+        <a href="javascript:void(0)" onclick="showCategory('tech')">التعريب والتقنية</a>
+        <a href="javascript:void(0)" onclick="showCategory('creative')">المحتوى الإبداعي</a>
+        <a href="javascript:void(0)" onclick="showCategory('business')">حلول الشركات</a>
+    </div>
+</div>
+        <a href="javascript:void(0)" id="nav-counter" onclick="showPage('word-counter-page')">عداد الكلمات</a>
+        <a href="javascript:void(0)" id="nav-about" onclick="showPage('about-page')">من نحن</a>
+        <a href="javascript:void(0)" id="nav-contact" onclick="showPage('contact-page')">تواصل معنا</a>
+    </nav>
+</aside>
+
+<main>
+    <section id="home-page" class="page active">
+        <div class="hero">
+            <h1>دقتنا اللغوية.. بوابتكم للعالمية</h1>
+            <div class="services-grid">
+                <div class="grid-box" onclick="showCategory('certified')">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>الترجمة المعتمدة</h3>
+                </div>
+                <div class="grid-box" onclick="showCategory('tech')">
+                    <i class="fas fa-microchip"></i>
+                    <h3>التعريب والتقنية</h3>
+                </div>
+                <div class="grid-box" onclick="showCategory('creative')">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h3>المحتوى الإبداعي</h3>
+                </div>
+                <div class="grid-box" onclick="showCategory('business')">
+                    <i class="fas fa-globe"></i>
+                    <h3>حلول الشركات</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="category-page" class="page">
+        <h2 id="cat-name-display">اسم القسم</h2>
+        <div id="products-container" class="products-list"></div>
+    </section>
+
+    <section id="calc-page" class="page">
+        <div class="trjm-premium-container">
+            <div class="trjm-premium-header">
+                <h2 id="current-product-name">اسم الخدمة</h2>
+                <div class="trjm-premium-badges"></div>
+            </div>
+            <hr class="trjm-premium-divider">
+            <div class="trjm-premium-section">
+                <label class="trjm-premium-label">عدد الكلمات المطلوبة:</label>
+                <div class="trjm-premium-input-wrapper">
+                    <input type="number" id="word-input" value="100" oninput="updatePremiumPrice(this)" class="trjm-premium-input">
+                    <span class="input-suffix">كلمة</span>
+                </div>
+            </div>
+            <div class="trjm-premium-price-card">
+                <span class="price-label">السعر التقديري:</span>
+                <div class="price-value-wrapper">
+                    <span id="final-price" class="price-value">45.00</span>
+                    <span class="trjm-premium-currency">⃁</span>
+                </div>
+            </div>
+            <div class="upload-box">
+                <i class="fas fa-paperclip"></i> 
+                <p>اضغط هنا لإرفاق ملف المشروع</p>
+                <small>(PDF, Word, Images)</small>
+            </div>
+            <div class="payment-options-container">
+                <button class="btn-apple"><i class="fab fa-apple"></i> Pay</button>
+                <button class="btn-buy-now">اشتري الآن <i class="fas fa-wallet" style="margin-left:5px;"></i></button>
+                <button class="btn-cart-small"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="word-counter-page" class="page">
+        <div class="counter-card">
+            <h3>عداد الكلمات الذكي 🖋️</h3>
+            <textarea id="text-input" oninput="runWordCounter()" placeholder="أدخل النص هنا..."></textarea>
+         <div class="counter-container">
+  <div class="counter-box">
+    <span class="counter-label">الكلمات</span>
+    <span id="wordCount" class="counter-number">0</span>
+  </div>
+  
+  <div class="divider"></div>
+
+  <div class="counter-box">
+    <span class="counter-label">الحروف</span>
+    <span id="charCount" class="counter-number">0</span>
+  </div>
+</div>
+           <button id="modernClearBtn" class="trjm-modern-btn">
+  <i class="fas fa-trash-alt"></i> مسح النص
+</button>
+        </div>
+    </section>
+
+    <section id="about-page" class="page">
+        <div class="content-box">
+            <h2>من نحن</h2>
+            <h1 class="about-title">TRJM</h1>
+            <p class="about-subtitle">حيث تلتقي الدقة بالتمكين الرقمي</p>
+            <div class="about-text-content">
+                <p>في <strong>TRJM</strong>، لا ننظر إلى الكلمات كـ "أحرف" فحسب، بل هي الجسر الذي ينقل طموحاتكم إلى العالم.</p>
+                <blockquote class="about-quote">"نحن لا نترجم الكلمات، نحن ننقل الأثر."</blockquote>
+            </div>
+        </div>
+    </section>
+
+<section id="contact-page" class="page">
+    <div class="contact-container">
+        <h2>تواصل معنا</h2>
+        <form class="contact-form">
+            <div class="input-group">
+                <label>الاسم</label>
+                <input type="text" placeholder="أدخل اسمك">
+            </div>
+            <div class="input-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" placeholder="example@mail.com">
+            </div>
+            <div class="input-group">
+                <label>الرسالة</label>
+                <textarea rows="4" placeholder="اكتب رسالتك هنا..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">إرسال الطلب</button>
+        </form>
+    </div>
+</section>
+
+    <section id="cart-page" class="page">
+        <h2>سلة المشتريات</h2>
+        <div id="cart-content">السلة فارغة</div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="social-icons">
+        <a href="http://linkedin.com/in/sarah-alshatiti-566776349" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/trjm_sa?s=21" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-links">
+        <span onclick="showPage('about-page')">من نحن</span> | 
+        <span onclick="showPage('home-page')">الرئيسية</span> | 
+        <span onclick="showPage('word-counter-page')">عداد الكلمات</span> | 
+        <span onclick="showPage('contact-page')">تواصل معنا</span>
+    </div>
+    <p>© 2026 TRJM - جميع الحقوق محفوظة</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
